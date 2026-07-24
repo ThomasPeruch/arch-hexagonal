@@ -4,6 +4,6 @@ import com.peruch.hexagonal.application.core.domain.Address;
 
 public interface FindAddressByZipCodeOutputPort {
 
-    public Address find(String zipCode);
+    Address find(String zipCode);
 
 }
