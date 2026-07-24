@@ -4,6 +4,7 @@ import org.apache.kafka.common.protocol.types.Field;
 
 public class Customer {
 
+    private String id;
     private String name;
     private Address address;
     private Boolean isValidCpf;
@@ -13,11 +14,20 @@ public class Customer {
         this.isValidCpf = false;
     }
 
-    public Customer(String name, Address address, Boolean isValidCpf, String cpf) {
+    public Customer(String id, String name, Address address, Boolean isValidCpf, String cpf) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.isValidCpf = isValidCpf;
         this.cpf = cpf;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

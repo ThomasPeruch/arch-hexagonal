@@ -7,6 +7,7 @@ import com.peruch.hexagonal.adapters.in.controller.response.CustomerResponse;
 import com.peruch.hexagonal.application.core.domain.Customer;
 import com.peruch.hexagonal.application.ports.in.FindCustomerByIdInputPort;
 import com.peruch.hexagonal.application.ports.in.InsertCustomerInputPort;
+import com.peruch.hexagonal.application.ports.in.UpdateCustomerInputPort;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ public class CustomerController {
     private CustomerResponseMapper customerResponseMapper;
     @Autowired
     private FindCustomerByIdInputPort findCustomerByIdInputPort;
+    @Autowired
+    private UpdateCustomerInputPort updateCustomerInputPort;
 
     @PostMapping
     public ResponseEntity<Void> insertCustomer(@Valid @RequestBody CustomerRequest customerRequest){
@@ -36,5 +39,13 @@ public class CustomerController {
         Customer customer = findCustomerByIdInputPort.findByCustomerId(customerId);
         CustomerResponse customerResponse = customerResponseMapper.toCustomerResponse(customer);
         return ResponseEntity.ok(customerResponse);
+    }
+
+    @PutMapping("/{customerId}")
+    public ResponseEntity<Void> updateCustomer(@PathVariable("customerId") String customerId, @Valid @RequestBody CustomerRequest customerRequest){
+        Customer customer = customerRequestMapper.toCustomer(customerRequest);
+        customer.setId(customerId);
+        updateCustomerInputPort.update(customerRequest.getZipCode(), customer);
+        return ResponseEntity.noContent().build();
     }
 }
