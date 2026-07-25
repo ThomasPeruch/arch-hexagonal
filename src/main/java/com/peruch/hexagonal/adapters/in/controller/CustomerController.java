@@ -5,6 +5,7 @@ import com.peruch.hexagonal.adapters.in.controller.mapper.CustomerResponseMapper
 import com.peruch.hexagonal.adapters.in.controller.request.CustomerRequest;
 import com.peruch.hexagonal.adapters.in.controller.response.CustomerResponse;
 import com.peruch.hexagonal.application.core.domain.Customer;
+import com.peruch.hexagonal.application.ports.in.DeleteCustomerInputPort;
 import com.peruch.hexagonal.application.ports.in.FindCustomerByIdInputPort;
 import com.peruch.hexagonal.application.ports.in.InsertCustomerInputPort;
 import com.peruch.hexagonal.application.ports.in.UpdateCustomerInputPort;
@@ -26,6 +27,8 @@ public class CustomerController {
     private FindCustomerByIdInputPort findCustomerByIdInputPort;
     @Autowired
     private UpdateCustomerInputPort updateCustomerInputPort;
+    @Autowired
+    private DeleteCustomerInputPort deleteCustomerInputPort;
 
     @PostMapping
     public ResponseEntity<Void> insertCustomer(@Valid @RequestBody CustomerRequest customerRequest){
@@ -46,6 +49,12 @@ public class CustomerController {
         Customer customer = customerRequestMapper.toCustomer(customerRequest);
         customer.setId(customerId);
         updateCustomerInputPort.update(customerRequest.getZipCode(), customer);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{customerId}")
+    public ResponseEntity<Void> updateCustomer(@PathVariable("customerId") String customerId){
+        deleteCustomerInputPort.delete(customerId);
         return ResponseEntity.noContent().build();
     }
 }
