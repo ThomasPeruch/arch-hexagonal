@@ -11,7 +11,6 @@ import com.tngtech.archunit.junit.AnalyzeClasses;
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 
 @AnalyzeClasses(packages = "com.peruch.hexagonal")
-@SpringBootTest
 public class LayeredArchitectureTests {
 
     @ArchTest
