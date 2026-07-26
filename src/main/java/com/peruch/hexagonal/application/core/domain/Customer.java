@@ -1,7 +1,5 @@
 package com.peruch.hexagonal.application.core.domain;
 
-import org.apache.kafka.common.protocol.types.Field;
-
 public class Customer {
 
     private String id;
@@ -46,11 +44,11 @@ public class Customer {
         this.address = address;
     }
 
-    public Boolean getValidCpf() {
+    public Boolean getIsValidCpf() {
         return isValidCpf;
     }
 
-    public void setValidCpf(Boolean validCpf) {
+    public void setIsValidCpf(Boolean validCpf) {
         isValidCpf = validCpf;
     }
 

@@ -1,6 +1,5 @@
 package com.peruch.hexagonal.adapters.in.controller.request;
 
-import com.peruch.hexagonal.adapters.out.repository.entity.AddressEntity;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 

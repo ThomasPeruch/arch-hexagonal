@@ -26,10 +26,9 @@ public class UpdateCustomerUseCase implements UpdateCustomerInputPort {
 
     @Override
     public void update(String zipCode, Customer customer) {
-        Customer optionalCustomer = findCustomerByIdInputPort.findByCustomerId(customer.getId());
+        findCustomerByIdInputPort.findByCustomerId(customer.getId());
         Address address = findAddressByZipCodeOutputPort.find(zipCode);
-        optionalCustomer.setAddress(address);
-        updateCustomerOutputPort.update(optionalCustomer);
+        customer.setAddress(address);
+        updateCustomerOutputPort.update(customer);
     }
-
 }
