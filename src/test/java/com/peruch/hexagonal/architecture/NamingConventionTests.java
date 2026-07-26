@@ -48,4 +48,22 @@ public class NamingConventionTests {
             .resideInAPackage("..repository")
             .as("repository classes should reside in repository package");
 
+    @ArchTest
+    public static final ArchRule should_have_suffix_consumer = classes().that()
+            .resideInAPackage("..consumer")
+            .should()
+            .haveSimpleNameEndingWith("Consumer")
+            .as("consumer class should have Consumer suffix");
+
+    @ArchTest
+    public static final ArchRule should_have_suffix_mapper = classes().that()
+            .resideInAPackage("..mapper")
+            .should()
+            .resideInAnyPackage(
+                    "..adapters.in.consumer.mapper",
+                    "..adapters.in.controller.mapper",
+                    "..adapters.out.client.mapper",
+                    "..adapters.out.repository.mapper")
+            .as("mapper classes should have Mapper(or MapperImpl) suffix");
+
 }
